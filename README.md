@@ -19,7 +19,7 @@
 [X] guardar historico (Banco de dados)
 
 
-Alunos:
+# Alunos: <br>
 Juarez José: https://github.com/LongDayJ <br>
 Antonio Netto: https://github.com/AntonioSantiagoN <br>
 Carlos Eduardo: https://github.com/Carloseduardomdeamaciel <br>
