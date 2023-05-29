@@ -1,0 +1,14 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/lilweather?createDatabaseIfNotExist=true
+        username: root
+        password: root
+    data:
+        web:
+            pageable:
+                default-page-size: 5
+                max-page-size: 5
+                default-page-number: 0
+                default-sort: id,asc
+                
