@@ -3,6 +3,7 @@ package br.com.lilweather.dto;
 import br.com.lilweather.clima.Weather;
 
 public record WeatherListDTO(
+        Long id,
         String cityName,
         String cityCountry,
         String main,
@@ -11,9 +12,10 @@ public record WeatherListDTO(
 
 ) {
     public WeatherListDTO(Weather weather) {
-        this(weather.getCityName(), 
+        this(weather.getId(),
+            weather.getCityName(), 
             weather.getCityCountry(), 
-            weather.getMain(), 
+            weather.getMain(),
             weather.getDescription(), 
             weather.getTimer());
     }
