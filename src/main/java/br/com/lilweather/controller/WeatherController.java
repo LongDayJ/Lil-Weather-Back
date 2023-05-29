@@ -12,6 +12,9 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +37,10 @@ public class WeatherController {
 
     @GetMapping("/previsao")
     @Transactional
-    public String previsao(@RequestParam("cidade") String cityName) throws IOException, InterruptedException {
+    public Page<WeatherListDTO> insert(@RequestParam("cidade") String cityName,
+                @SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable)
+            throws IOException, InterruptedException {
+        
         String nomeTratado = cityName.replace(" ", "+");
         String url = "" + APIurl + nomeTratado + APIlang + "&appid=" + APIkey;
 
@@ -73,7 +79,7 @@ public class WeatherController {
             }
         }
 
-        return "(╯°□°）╯︵ ┻━┻";
+        return repository.findAll(pageable).map(WeatherListDTO::new);
     }
 
     @GetMapping("/list")
