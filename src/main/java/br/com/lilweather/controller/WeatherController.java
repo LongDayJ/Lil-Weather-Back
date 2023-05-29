@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,26 +23,24 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.lilweather.clima.Weather;
 import br.com.lilweather.dto.WeatherListDTO;
 import br.com.lilweather.repository.WeatherRepository;
+import br.com.lilweather.utils.Constants;
 import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/weather")
 public class WeatherController {
-    private static final String APIkey = "0c09765e328574bfbec932547d0f39fd";
-    private static final String APIurl = "https://api.openweathermap.org/data/2.5/forecast?q=";
-    private static final String APIlang = "&lang=pt_br";
 
     @Autowired
     private WeatherRepository repository;
 
-    @GetMapping("/previsao")
+    @PostMapping("/previsao")
     @Transactional
     public Page<WeatherListDTO> insert(@RequestParam("cidade") String cityName,
                 @SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable)
             throws IOException, InterruptedException {
         
         String nomeTratado = cityName.replace(" ", "+");
-        String url = "" + APIurl + nomeTratado + APIlang + "&appid=" + APIkey;
+        String url = "" + Constants.APIurl + nomeTratado + Constants.APIlang + "&appid=" + Constants.APIkey;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build(); // BUILDER
