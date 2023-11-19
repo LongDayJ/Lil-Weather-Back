@@ -11,4 +11,3 @@ spring:
                 max-page-size: 5
                 default-page-number: 0
                 default-sort: id,asc
-                
