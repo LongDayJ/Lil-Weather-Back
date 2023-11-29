@@ -7,7 +7,7 @@ spring:
     data:
         web:
             pageable:
-                default-page-size: 5
-                max-page-size: 5
+                default-page-size: 1
+                max-page-size: 1
                 default-page-number: 0
-                default-sort: id,asc
+                default-sort: id,desc
